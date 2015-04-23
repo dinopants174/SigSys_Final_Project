@@ -1,16 +1,23 @@
 orig = im2double(imread('hepburn.jpg'));
 figure
 imshow(orig)
-imwrite(orig, 'orig_imag.jpg')
 
 Y = fft2(orig);
 [rows, cols] = size(Y);
 g = max(max(abs(Y)));
 Y_compress = Y;
+count_orig = 0;
+count = 0;
+
 for m = 1:rows
     for n = 1:cols
         if abs(Y(m,n)) < 0.0001*g
             Y_compress(m,n) = 0;
+            count = count+1;
+        end
+        
+        if round(abs(Y(m,n))) == 0
+            count_orig = count_orig+1;
         end
     end
 end
@@ -19,4 +26,6 @@ compress = abs(ifft2(Y_compress));
 figure
 imshow(compress)
 test = uint8(255*compress);
-imwrite(test, 'compress_imag_0.005.jpg')
+imwrite(test, 'compress_imag_0.001.jpg')
+
+percent_attenuate = ((count-count_orig)/ (rows*cols)) * 100
