@@ -7,6 +7,8 @@ x = im2double(x);
 figure; imshow(x);
 
 y = haar_2d(x);
+% y = haar_2d(w);
+% y = haar_2d(q);
 
 z = haar_2d_inverse(y);
 figure; imshow(y);
@@ -22,7 +24,7 @@ count2 = 0;
 
 for i = 1:length(y(:,1))
     for j = 1:length(y(1,:))
-        if y(j,i) == 0
+        if y(j,i) < 0.001
             count = count + 1;
         else
             count2 = count2 +1;
@@ -32,5 +34,5 @@ end
 total_coeff = 512*512;
 count;
 count2;
-count*100/total_coeff; %percent attenuation
+count*100/total_coeff %percent attenuation
     

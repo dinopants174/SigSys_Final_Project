@@ -11,7 +11,7 @@ count = 0;
 
 for m = 1:rows
     for n = 1:cols
-        if abs(Y(m,n)) < 0.0001*g
+        if abs(Y(m,n)) < 0.005*g
             Y_compress(m,n) = 0;
             count = count+1;
         end
@@ -26,6 +26,6 @@ compress = abs(ifft2(Y_compress));
 figure
 imshow(compress)
 test = uint8(255*compress);
-imwrite(test, 'compress_imag_0.001.jpg')
+imwrite(test, 'compress_imag_0.005.jpg')
 
 percent_attenuate = ((count-count_orig)/ (rows*cols)) * 100
