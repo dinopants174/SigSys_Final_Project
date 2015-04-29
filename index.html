@@ -8,27 +8,93 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/our_style.css" media="screen">
   </head>
   <body>
     <section class="page-header">
       <h1 class="project-name">Signals and Systems 2015 Final Project:</h1>
       <h1 class="project-name">Haar Wavelet Transform</h1>
-      <h2 class="project-tagline">This is the base repository for the Signals and Systems 2015 Final Project work on the Haar Wavelet Transform. The contributors in this repository are Zoher Ghadyali (<a href="https://github.com/dinopants174" class="user-mention">@dinopants174</a>), Cynthia Chen (<a href="https://github.com/yunhsincynthiachen" class="user-mention">@yunhsincynthiachen</a>), and Nitya Dhanushkodi(<a href="https://github.com/ndhanushkodi" class="user-mention">@ndhanushkodi</a>).</h2>
+      <h2 class="project-tagline">This is the base repository for the Signals and Systems 2015 Final Project work on the Haar Wavelet Transform. The contributors in this repository are Zoher Ghadyali <a href="https://github.com/dinopants174" class="user-mention">@dinopants174</a>, Cynthia Chen <a href="https://github.com/yunhsincynthiachen" class="user-mention">@yunhsincynthiachen</a>, and Nitya Dhanushkodi <a href="https://github.com/ndhanushkodi" class="user-mention">@ndhanushkodi</a>.</h2>
       <a href="https://github.com/dinopants174/SigSys_Final_Project" class="btn">View on GitHub</a>
       <a href="https://github.com/dinopants174/SigSys_Final_Project/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/dinopants174/SigSys_Final_Project/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
-      <h3>
+    <h3>Project Overview</h3>
+
+    <p>
+      For our final project in Signals and Systems, we chose to study the Haar Wavelet Transform and apply it in both audio compression and image compression. We also used an FFT algorithm to compress the same image and compare the resultant image compressions.
+    </p>
+    <p>
+      In the first phase of this project, we sought a mathematical understanding of the Haar Wavelet Transform. Once we understood how the transform worked in both one and two dimensons, we began working on using the transform to compress audio, using our one-dimensional understanding of the transform, and images, using our two-dimensional understanding of the transform.
+    </p>
+
+    <p>
+      The mathematics is explained in the following two sections and we then demo our code and results.
+    </p>
+
+    <h3>Haar Wavelet Transform: 1D Explanation</h3>
+
+    <h3>Haar Wavelet Transform: 2D Explanation</h3>
+
+    <h3>Implementation: Haar Wavelet Audio Compression</h3>
+
+    <h3>Implementation: Haar Wavelet Image Compression</h3>
+
+    <h3>Implementation: FFT Image Compression</h3>
+      
+
+
+
+
+
+    <h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
 <p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<pre><code>function res = fft_compression(imagePath, threshold_factor, outputPath)
+% This function takes as input the filename of the image you want to
+% compress, the threshold factor which will be multiplied by the term in the
+% Fourier series with the greatest magnitude, and the filename of the
+% resulting output. The function ouputs the percent of terms in the Fourier
+% series that have been attenuated because the magnitude of these terms is
+% below the given threshold.
+orig = im2double(imread(imagePath));
+figure
+imshow(orig)    %creates the matrix of the original image
+
+Y = fft2(orig); %perform the fft on the original image
+[rows, cols] = size(Y);
+max_mag = max(max(abs(Y))); %determines the maximum magnitude of the terms in the Fourier Series
+Y_compress = Y; %stores the original image in a matrix we will loop through and make sparser
+count_orig = 0; %counts the terms in the Fourier series that are already 0
+count = 0;  %counts the terms in the Fourier series that are attenuated to 0
+
+for m = 1:rows
+    for n = 1:cols
+        if abs(Y(m,n)) < threshold_factor*max_mag
+            Y_compress(m,n) = 0;    %attenuates to 0 terms in the Fourier series whose magnitude 
+                                    %are below threshold
+            count = count+1;
+        end
+        
+        if round(abs(Y(m,n))) == 0  %counts how many terms in the Fourier series are practically 0,
+                                    %without attenuation
+            count_orig = count_orig+1;
+        end
+    end
+end
+compress = abs(ifft2(Y_compress)); %perform the ifft on the new, sparser matrix
+figure
+imshow(compress)
+fin = uint8(255*compress);  %converts back so we can save it as a .jpg file
+imwrite(fin, outputPath)
+
+percent_attenuate = ((count-count_orig)/ (rows*cols)) * 100;    %calculates the percentage of terms in the fourier series that are attenuated
+res = percent_attenuate;
+end</code></pre>
 
 <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
@@ -42,12 +108,6 @@ $ git checkout gh-pages
 
 <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
