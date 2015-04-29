@@ -44,19 +44,38 @@
 
     <h3>Implementation: FFT Image Compression</h3>
 
-    <h3>Future Work</h3>
-      
+    <div id="orig_imag">
+      <img src="hepburn.jpg">
+      <p>Original 512x512 image of Audrey Hepburn</p>
+    </div>
 
 
+    <div class="floated_img_tr">
+      <img src="compress_imag_0.0001.jpg" alt="Some image">
+      <p>Description of above image</p>
+    </div>
+    <div class="floated_img_tr">
+      <img src="compress_imag_0.0002.jpg" alt="Another image">
+      <p>Description of above image</p>
+    </div>
+    <div class="floated_img_tr">
+      <img src="compress_imag_0.0005.jpg" alt="Another image">
+      <p>Description of above image</p>
+    </div>
+    <div class="floated_img">
+      <img src="compress_imag_0.001.jpg" alt="Another image">
+      <p>Description of above image</p>
+    </div>
+    <div class="floated_img">
+      <img src="compress_imag_0.002.jpg" alt="Another image">
+      <p>Description of above image</p>
+    </div>
+    <div class="floated_img">
+      <img src="compress_imag_0.005.jpg" alt="Another image">
+      <p>Description of above image</p>
+    </div>
 
-
-
-    <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>function res = fft_compression(imagePath, threshold_factor, outputPath)
+    <pre id="ZG_code"><code>function res = fft_compression(imagePath, threshold_factor, outputPath)
 % This function takes as input the filename of the image you want to
 % compress, the threshold factor which will be multiplied by the term in the
 % Fourier series with the greatest magnitude, and the filename of the
@@ -97,6 +116,22 @@ imwrite(fin, outputPath)
 percent_attenuate = ((count-count_orig)/ (rows*cols)) * 100;    %calculates the percentage of terms in the fourier series that are attenuated
 res = percent_attenuate;
 end</code></pre>
+
+
+
+
+    <h3 id="fw">Future Work</h3>
+      
+
+
+
+
+
+    <h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+
+<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+
 
 <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 

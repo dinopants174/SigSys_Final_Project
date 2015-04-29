@@ -1,3 +1,31 @@
 .user-mention{
 	color: white;
 }
+
+.floated_img_tr
+{
+    float: left;
+    height:30%;
+    width:30%;
+    position:relative;
+    margin-top: 70%;
+}
+
+.floated_img{
+    float: left;
+    height:30%;
+    width:30%;
+    position:relative;
+}
+
+#orig_imag{
+	position:absolute;
+	text-align: center;
+	margin-left: 10%;
+	height:30%;
+	width:30%;
+}
+
+#ZG_code{
+	margin-top: 150%;
+}
