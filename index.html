@@ -44,6 +44,12 @@
 
     <h3>Implementation: FFT Image Compression</h3>
 
+    <p>In order to compare the output of our Haar Wavelet Compression, we implemented a very basic FFT compression algorithm. This algorithm takes the original image as a matrix, performs the 2-dimensional Fourier Transform, and then determines if the magnitude of each term in the Fourier series is below a given threshold. If the magnitude is below the threshold, we attenuate that term to zero.</p>
+
+    <p>After creating this sparser matrix, we then perform the inverse 2-D FFT and save that matrix as our compressed image. In addition, we calculate the percentage of terms in the Fourier series that we are attenuating to zero. To determine this percentage, we first calculate how many terms in the Fourier series are already practically 0. We then keep a count of how many additional terms in the Fourier series we are setting to 0. These additional terms that are being attenuated divided by the total number of terms in the series produces the percentage of the terms we attenuated in the Fourier series.</p>
+
+    <p>Below is the original image of Audrey Hepburn, followed by several more compressed images using this algorithm. Both the threshold factor, which is multiplied by the term in the Fourier series with the maximum magnitude to determine the threshold, and the percentage of terms in the Fourier series that are attenuated are labeled underneath each compressed image.</p>
+
     <div id="orig_imag">
       <img src="hepburn.jpg">
       <p>Original 512x512 image of Audrey Hepburn</p>
@@ -52,30 +58,36 @@
 
     <div class="floated_img_tr">
       <img src="compress_imag_0.0001.jpg" alt="Some image">
-      <p>Description of above image</p>
+      <p>Threshold Factor=0.0001, 77.79% attenuation</p>
     </div>
     <div class="floated_img_tr">
       <img src="compress_imag_0.0002.jpg" alt="Another image">
-      <p>Description of above image</p>
+      <p>Threshold Factor=0.0002, 87.34% attenuation</p>
     </div>
     <div class="floated_img_tr">
       <img src="compress_imag_0.0005.jpg" alt="Another image">
-      <p>Description of above image</p>
+      <p>Threshold Factor=0.0005, 93.7% attenuation</p>
     </div>
     <div class="floated_img">
       <img src="compress_imag_0.001.jpg" alt="Another image">
-      <p>Description of above image</p>
+      <p>Threshold Factor=0.001, 95.54% attenuation</p>
     </div>
     <div class="floated_img">
       <img src="compress_imag_0.002.jpg" alt="Another image">
-      <p>Description of above image</p>
+      <p>Threshold Factor=0.002, 96.42% attenuation</p>
     </div>
     <div class="floated_img">
       <img src="compress_imag_0.005.jpg" alt="Another image">
-      <p>Description of above image</p>
+      <p>Threshold Factor=0.005, 96.82% attenuation</p>
     </div>
 
-    <pre id="ZG_code"><code>function res = fft_compression(imagePath, threshold_factor, outputPath)
+    <p id="ZG_p2">Looking at our results above, we can see that even when we are attenuating only terms in the series that are 1e-4 a factor of the maximum magnitude in the series, we lose over 75% of terms. That means we have made the image matrix over 75% sparser. This form of compression is lossy, just as our Haar Wavelet Transform compression is lossy. We are sacrificing terms in our Fourier Series to create a sparser matrix. 
+
+    <p>Initially, we get a very close representation of the original image with our compression at 77.79%. Increasing the percentage we attenuate makes the image grainier but still close to the original. We also see huge gains in the percentage we are attenuating without sacrificing a lot of quality in the image. As we keep increasing the percentage of terms we are attenuating, we observe diminishing returns. A 0.4% increase in attenuation above 96% leads to serious distortion of the image, blurring out completely Hepburn's eyes, nose, and mouth.</p>
+
+    <p>Below is our FFT compression function, which is also contained in our Github repository as the file <a href="https://github.com/dinopants174/SigSys_Final_Project/blob/master/fft_compression.m">fft_compression.m</a>.</p>
+
+    <pre><code>function res = fft_compression(imagePath, threshold_factor, outputPath)
 % This function takes as input the filename of the image you want to
 % compress, the threshold factor which will be multiplied by the term in the
 % Fourier series with the greatest magnitude, and the filename of the
