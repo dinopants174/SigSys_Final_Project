@@ -44,6 +44,22 @@
 
     <h3>Implementation: Haar Wavelet Image Compression</h3>
 
+    <p>Haar Wavelet compression involves averaging and differencing all of the values in the rows and columns of an image. When implemented, the transform allows us to quantify levels of detail and perform image compression based on the desired level of detail. The resulting image produced can be then evaluated for the level in which the original values are attenuated and the new image matrix is sparse. A sparse matrix is defined as a matrix with a large portion of the values to be zero.</p>
+
+    <p>After implementing the mathematics as described in the section "Haar Wavelet Transform: 2D Explanations" with Matlab, we see the level of attenuation. The image below is the original image of Audrey Hepburn before we performed the Haar Wavelet Transform on, and the original image is followed by the resulting image after the Haar Wavelet transformation.</p>
+
+    <div id="orig_imagHaar">
+      <img src="hepburn.jpg">
+      <p>Original 512x512 image of Audrey Hepburn</p>
+    </div>
+
+    <div id="orig_imagHaar">
+      <img src="audrey_haartransformed.png">
+      <p>Haar Wavelet Transformed Image, 84.05% Attenuation</p>
+    </div>   
+
+    As shown by the Haar Wavelet transformed image, through averaging, the approximate detail of each 8 by 8 block is demonstrated by the good frequency resolution of the edges and ridges in the image. In addition, through differencing, a lot of the extra detail (like the white background of the image) is reduced to 0's, which means that the new image matrix is sparse and attenuated.
+
     <h3>Implementation: FFT Image Compression</h3>
 
     <p>In order to compare the output of our Haar Wavelet Compression, we implemented a very basic FFT compression algorithm. This algorithm takes the original image as a matrix, performs the 2-dimensional Fourier Transform, and then determines if the magnitude of each term in the Fourier series is below a given threshold. If the magnitude is below the threshold, we attenuate that term to zero.</p>
