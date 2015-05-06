@@ -61,16 +61,30 @@
     <p> The mathematical steps of the Haar Wavelet Transform: </p>
 
     <ul>
-      <li> Pair all of the values of the original now </li>
-      <li> For each pair (a, b), calculate (a+b)/2, and then replace the values of the original row. These values are the approximate coefficients, since you are taking a running average. Shown in black in the example below. </li>
-      <li> For each pair (a, b), calculate (a-b)/2, and then replace the values of the original row. These values are the difference coefficients, since you are taking a running difference. Shown in gray in the example below. </li>
-      <li>Repeat STEP 1-3 on the approximate coefficients, until you are left with one approximate coefficient</li>
+      <li> Step 1: Pair all of the values of the original now </li>
+      <li> Step 2: For each pair (a, b), calculate (a+b)/2, and then replace the values of the original row. These values are the approximate coefficients, since you are taking a running average. Shown in black in the example below. </li>
+      <li> Step 3: For each pair (a, b), calculate (a-b)/2, and then replace the values of the original row. These values are the difference coefficients, since you are taking a running difference. Shown in gray in the example below. </li>
+      <li> Step 4: Repeat STEP 1-3 on the approximate coefficients, until you are left with one approximate coefficient</li>
     </ul>
     <p>Here are the steps illustrated out on one row: </p>
     <img id="exp_img" src="MathExp1Row.png">
     <p>Once you do the steps on every row and every column of the 8 by 8 matrix, you end up with the following matrix:</p>
     <img id="post_imagHaar" src="PostTransMat.png">
     <p>Now let's compare this to the original matrix. </p>
+    <img id="orig_imagHaar" src="8by8matrix.png">
+    <p>You can see that the post transform matrix is more sparse than the original matrix, and has a lot of small numbers. By attenuating these small numbers to 0, we can compress the image without too much loss!</p>
+
+    <h5>A Linear Algebra Approach</h5>
+    <p>We'll also show here the transformation matrix to essentially do steps 1-4 without manually taking the averages and differences. Applying these matrices allow you to do the same operations!</p>
+
+    <p>To do steps 1-3 on ALL of the rows, we multiply the 8 by 8 matrix by this matrix, H1:</p>
+    <img id="orig_imagHaar" src="Steps1and2Mat.png">
+    <p>For an 8 by 8 matrix, in order to end up with just one approximate coefficient, you need to do steps 1-3, 3 times. To do it a second time, we multiply by H1H2: </p>
+    <img id="orig_imagHaar" src="Steps1and2times2Mat.png">
+    <p>And to repeat steps 1-3 a third time, we multiply by H1H2H3: </p>
+    <img id="orig_imagHaar" src="Steps1and2times3Mat.png">
+    <p>If you take an 8 by 8 matrix and multiply it by H1H2H3, you have applied the transform on all the rows. In order to complete the transform on the entire matrix, you need to apply it on all the columns as well. If H=H1H2H3, and A is your original matrix, H(transform) will allow you to apply the transform on the columns. To apply the transform on all the rows and the columns of an 8 by 8 matrix, we use the operation H(transform)AH. It's important to note here that H will look different depending on the number of rows and columns of the original matrix.</p>
+
 
 
 
