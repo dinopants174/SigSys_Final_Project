@@ -26,6 +26,14 @@
 	width:30%;
 }
 
+#orig_imagHaar{
+    position:relative;
+    text-align: center;
+    margin-left: 18%;
+    height:50%;
+    width:50%;
+}
+
 #ZG_p2{
 	margin-top: 152%;
 }
