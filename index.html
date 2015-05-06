@@ -40,6 +40,33 @@
 
     <h3>Haar Wavelet Transform: 2D Explanation</h3>
 
+    <p>The process of the mathematics behind the Haar wavelet transform in two dimensions involve averaging to compute an approximate of the original signal, which is similar to applying low-pass filters. In addition, the transform involves computing the differences across the signal to detect when it is okay to attenuate certain detail coefficients to zero, which is similar to high-pass filters. </p>
+
+    <p> Each image is split into blocks that have a size with the form of 2<sup>n</sup>, in order to have a format that can have all values paired with each recursive step. </p>
+
+    <p> The following image is an example 8 by 8 matrix: </p>
+
+    <div id="orig_imagHaar">
+      <img src="8by8matrix.png">
+      <p>Example 8 by 8 matrix</p>
+    </div>
+
+    <p> We will be applying the transform process specifically to the first row of the 8 by 8 matrix, as shown below: </p>
+
+    <div id="orig_imagHaar">
+      <img src="8by8matrixrow.png">
+      <p>The row that we will be applying the transform on</p>
+    </div>
+
+    <p> The mathematical steps of the Haar Wavelet Transform: </p>
+
+    <ul>
+      <li> Pair all of the values of the original now </li>
+      <li> For each pair (a, b), calculate (a+b)/2, and then replace the values of the original row. These values are the approximate coefficients </li>
+      <li> For each pair (a, b) </li>
+
+
+
     <h3>Implementation: Haar Wavelet Audio Compression</h3>
 
     <h3>Implementation: Haar Wavelet Image Compression</h3>
@@ -222,7 +249,8 @@ end</code></pre>
     <p> Using what we have learned about the Haar wavelet transform, we would like to be able to implement Haar on fingerprint analysis, specifically seeing how it is more beneficial, in terms of image processing and how it is computationally faster. The ridges and valleys of fingerprints are
 
     <h3> Resources </h3>
-      
+    
+    <p>  </p>
 
 
 
