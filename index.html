@@ -285,11 +285,35 @@ end</code></pre>
 
     <h3 id="fw">Future Work</h3>
 
-    <p> Using what we have learned about the Haar wavelet transform, we would like to be able to implement Haar on fingerprint analysis, specifically seeing how it is more beneficial, in terms of image processing and how it is computationally faster. The ridges and valleys of fingerprints are
+    <p> Using what we have learned about the Haar wavelet transform, we would like to be able to implement Haar on fingerprint analysis, specifically seeing how it is more beneficial, in terms of image processing and how it is computationally faster. The ridges and valleys of fingerprints are specific to individuals, and they run parallel to each other, which means that the patterns can be analyzed on a global an dlocal level. The noise and distortion sometimes results in missing details. Using Haar wavelet method, features can be extracted from the fingerprints and sparse matrices can be used to attenuate extra detail. In terms of fingerprint verification, we want to study the verification accuracy and rate using Haar wavelet. </p>
+
+    <ul> The usual steps in fingerprint recognition system: </ul>
+      <li> Pre-processing of the fingerprint image </li>
+      <li> Haar Wavelet transform </li>
+      <li> Partition sub bands to blocks </li>
+      <li> Feature Extraction </li>
+      <li> Moment Analysis </li>
+      <li> Matching</li>
+    </ul>
+
+    <p> So far, we have only looked at the Haar wavelet transform. More specifically, we have looked at how the wavelet transform is applied to transform the important information of original image into compressed image with a good approximation of the original image and without much loss of information. The other bullet points are areas that we would like to delve into. </p>
+
+    <p> Lastly, although we compared the process and outputs of the Haar Wavelet Transform and FFT, we didn't look very much into computation speed of the two, so that would also be another area we would like to examine </p>
 
     <h3> Resources </h3>
+
+
     
-    <p>  </p>
+    <p>  Abdul-Haleem, Mela G., Loay E. George, and Huda M. Al-Bayti. "Fingerprint Recognition Using Haar Wavelet Transform and Local Ridge Attributes Only." International Journal of Advanced Research in Computer Science and Software Engineering 4.1 (2014): n. pag. Web. 01 May 2015. <http://www.ijarcsse.com/docs/papers/Volume_4/1_January2014/V4I1-0103.pdf>.</p>
+
+    <p> "PyWavelets - Discrete Wavelet Transform in Python." PyWavelets. N.p., n.d. Web. 01 May 2015.</p>
+
+    <p> Mulcahy, Colm. Image Processing Using Haar Wavelet Transform. N.p.: n.p., n.d. Web. 15 Apr. 2015.</p>
+
+    <p> Gadre, V. M. "Mod-01 Lec-02 The Haar Wavelet." YouTube. YouTube, n.d. Web. 20 April 2015. <https://www.youtube.com/watch?v=KHi6oG3rEqk>. </p>
+
+    <p> 572, Math. Haar Wavelet Image Compression (n.d.): n. pag. Web. 16 Apr. 2015. <https://people.math.osu.edu/husen.1/teaching/572/image_comp.pdf>. </p>
+
 
 
 
