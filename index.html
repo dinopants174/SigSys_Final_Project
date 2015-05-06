@@ -62,8 +62,15 @@
 
     <ul>
       <li> Pair all of the values of the original now </li>
-      <li> For each pair (a, b), calculate (a+b)/2, and then replace the values of the original row. These values are the approximate coefficients </li>
-      <li> For each pair (a, b) </li>
+      <li> For each pair (a, b), calculate (a+b)/2, and then replace the values of the original row. These values are the approximate coefficients, since you are taking a running average. Shown in black in the example below. </li>
+      <li> For each pair (a, b), calculate (a-b)/2, and then replace the values of the original row. These values are the difference coefficients, since you are taking a running difference. Shown in gray in the example below. </li>
+      <li>Repeat STEP 1-3 on the approximate coefficients, until you are left with one approximate coefficient</li>
+    </ul>
+    <p>Here are the steps illustrated out on one row: </p>
+    <img id="exp_img" src="MathExp1Row.png">
+    <p>Once you do the steps on every row and every column of the 8 by 8 matrix, you end up with the following matrix:</p>
+    <img id="post_imagHaar" src="PostTransMat.png">
+    <p>Now let's compare this to the original matrix. </p>
 
 
 
