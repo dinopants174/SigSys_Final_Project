@@ -41,19 +41,38 @@
     <h3>Haar Wavelet Transform: 2D Explanation</h3>
 
     <h3>Implementation: Haar Wavelet Audio Compression</h3>
-      <p>To see the effect of the Haar Wavelet transform on an audio signal, we implemented the transform using ___</p>
+      <p>To see the effect of the Haar Wavelet transform on an audio signal, we implemented the transform using the pywavelet library. You take the original signal, and by taking a running average and running difference, you are essentially putting the signal through a low pass and high pass filter. In the 1D implementation of the Haar Wavelet transform, you get two outputs for every level: the approximate and the detail. In the 2D implementation, you get four outputs for every level: approximate, horizontal detail, vertical detail, and diagonal detail. Here is the original signal: </p>
+      <hr>
       <h5>Original Saxophone Wave</h5>
       <audio controls>
         <source src="orig.wav" type="audio/wav">
       </audio>
+      <br>
+      <img src="OrigSpec.png"> 
+      <img src="OrigWav.png"> 
+      <hr>
+
+      <p>After taking the transform, you get out two arrays, the approximate and detail signal. We took the approximate part of the signal and a signal of zeros that was the length of the detail signal, and took the inverse Haar wavelet transform to get a lossy compressed version of the audio signal. If you were to take the inverse Haar wavelet transform with the approximate and the detail signal, you would get back the full original signal. Since we attenuated the detail to zero and took the inverse Haar wavelet transform, we get an approximate version of the signal, which we can look at here:</p>
+      <hr>
       <h5>Approximate Saxophone Wave</h5>
       <audio controls>
         <source src="approx.wav" type="audio/wav">
       </audio>
+      <br>
+      <img src="ApproxSpec.png"> 
+      <img src="ApproxWav.png"> 
+      <hr>
+      <p>Comparing the approximate spectrum to the original spectrum, there isn't a huge difference. There's a little bit of messy noise in the approximate, due to some sharper edges you can see in the wave. We are a little unsure as to why the spectrums are so similar, and would have expected more high frequencies to be cut out in the approximate spectrum. Comparing the approximate wave to the original wave, you can see that the original wave is a little smoother, and the approximate wave has a more slightly jagged version of the original wave. It's like a less high quality version of the original. </p>
+      <p>The detail portion of the wave comes out of splitting the original signal into approximate and detail. You can also get this by subtracting the approximate from the original signal. See the detail part here:</p>
+      <hr>
       <h5>Detail Saxophone Wave</h5>
       <audio controls>
         <source src="detail.wav" type="audio/wav">
-      </audio>
+      </audio> <div>
+      <img src="DetailSpec.png"> 
+      <img src="DetailWav.png">
+      <hr>
+      <p>Both the spectrum and the wave show the high frequency components of the detail portion of the wave. When you listen to it, it sounds like a higher pitch version of the original signal because it has multiples of the original frequency components in there.</p>
 
     <h3>Implementation: Haar Wavelet Image Compression</h3>
 
